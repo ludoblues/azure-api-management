@@ -35,7 +35,12 @@ module.exports = (credentials) => ({
         headers: {
           Authorization: `SharedAccessSignature ${accessToken}`
         },
-        json: user
+        json: {
+          email: user.email,
+          password: user.password,
+          firstName: user.firstName,
+          lastName: user.lastName
+        }
       };
 
       request(options, (err, response, body) => {

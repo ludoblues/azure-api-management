@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ludoblues/azure-api-management#readme",
   "dependencies": {
+    "moment": "^2.18.1",
     "request": "^2.81.0"
   }
 }

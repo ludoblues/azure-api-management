@@ -1,0 +1,23 @@
+{
+  "name": "azure-api-management",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ludoblues/azure-api-management.git"
+  },
+  "author": "ludoblues <ludovic.vue@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ludoblues/azure-api-management/issues"
+  },
+  "homepage": "https://github.com/ludoblues/azure-api-management#readme",
+  "dependencies": {
+    "azure-api-management": "https://github.com/ludoblues/azure-api-management.git",
+    "request": "^2.81.0"
+  }
+}

@@ -60,7 +60,7 @@ module.exports = (credentials) => ({
         (err || response.statusCode >= 400) ? reject(err || body) : resolve(body);
       });
     });
-  }
+  },
 
   generateAccessToken() {
     const hmac = crypto.createHmac('sha512', new Buffer(credentials.key, 'utf8'));
@@ -71,7 +71,7 @@ module.exports = (credentials) => ({
     const signature = digest.toString('base64');
 
     return `uid=${credentials.identifier}&ex=${expiry}&sn=${signature}`;
-  }
+  },
 
   verifySignInSignature(salt, returnUrl, sig) {
     const hmac = crypto.createHmac('sha512', new Buffer(credentials.delegationKey, 'base64'));
@@ -80,7 +80,7 @@ module.exports = (credentials) => ({
     const signature = digest.toString('base64');
 
     return signature === sig;
-  }
+  },
 
   verifySignOutSignature(salt, userId, sig) {
     const hmac = crypto.createHmac('sha512', new Buffer(credentials.delegationKey, 'base64'));
@@ -89,7 +89,7 @@ module.exports = (credentials) => ({
     const signature = digest.toString('base64');
 
     return signature === sig;
-  }
+  },
 
   verifySubscriptionSignature(salt, productId, userId, sig) {
     const hmac = crypto.createHmac('sha512', new Buffer(credentials.delegationKey, 'base64'));
@@ -98,7 +98,7 @@ module.exports = (credentials) => ({
     const signature = digest.toString('base64');
 
     return signature === sig;
-  }
+  },
 
   verifySignature(query) {
     if (query.operation === 'SignIn') {

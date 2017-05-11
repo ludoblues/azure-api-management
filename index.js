@@ -44,6 +44,24 @@ module.exports = (credentials) => ({
     });
   },
 
+  removeUser(userId, accessToken) {
+    return new Promise( (resolve, reject) => {
+      const options = {
+        method: 'DELETE',
+        baseUrl: credentials.restApi,
+        uri: `/users/${user.id}?api-version=2016-10-10`,
+        headers: {
+          Authorization: `SharedAccessSignature ${accessToken}`,
+          'If-Match': '*'
+        }
+      };
+
+      request(options, (err, response, body) => {
+        (err || response.statusCode >= 400) ? reject(err || body) : resolve(body);
+      });
+    });
+  },
+
   getReportByApi(filter, accessToken) {
     return new Promise( (resolve, reject) => {
       const options = {

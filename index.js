@@ -1,7 +1,7 @@
 const request = require('request');
 
 module.exports = baseUrl => ({
-  connectUserToAzureSSO(userId, accessToken) {
+  connectUser(userId, accessToken) {
     return new Promise( (resolve, reject) => {
       const options = {
         method: 'POST',
@@ -23,7 +23,7 @@ module.exports = baseUrl => ({
     });
   },
 
-  registerToAzureStore(user, accessToken) {
+  createUser(user, accessToken) {
     return new Promise( (resolve, reject) => {
       const options = {
         method: 'PUT',

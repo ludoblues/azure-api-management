@@ -97,9 +97,9 @@ module.exports = (credentials) => ({
         }
       };
 
-      request(options, (err, response, body) => (
+      request(options, (err, response, body) => {
         (err || response.statusCode >= 400) ? reject(err || body) : resolve(body)
-      ));
+      });
     });
   },
 
@@ -115,9 +115,9 @@ module.exports = (credentials) => ({
         }
       };
 
-      request(options, (err, response, body) => (
+      request(options, (err, response, body) => {
         (err || response.statusCode >= 400) ? reject(err || body) : resolve(body)
-      ));
+      });
     });
   },
 

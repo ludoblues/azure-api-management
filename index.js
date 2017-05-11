@@ -21,7 +21,7 @@ module.exports = baseUrl => ({
         resolve(body.value);
       });
     });
-  }
+  },
 
   registerToAzureStore(user, accessToken) {
     return new Promise( (resolve, reject) => {
@@ -39,7 +39,7 @@ module.exports = baseUrl => ({
         (err || response.statusCode >= 400) ? reject(err || body) : resolve(body);
       });
     });
-  }
+  },
 
   getReportByApi(filter, accessToken) {
     return new Promise( (resolve, reject) => {

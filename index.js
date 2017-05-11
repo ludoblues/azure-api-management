@@ -80,6 +80,47 @@ module.exports = (credentials) => ({
     });
   },
 
+  subscribe(userId, productId, subscription, accessToken) {
+    return new Promise((resolve, reject) => {
+      const options = {
+        method: 'PUT',
+        baseUrl: credentials.restApi,
+        uri: `/subscriptions/${subscription.id}?api-version=2016-10-10`,
+        headers: {
+          Authorization: `SharedAccessSignature ${accessToken}`
+        },
+        json: {
+          userId: `/users/${userId}`,
+          productId: `/products/${productId}`,
+          name: subscription.name,
+          state: 'active'
+        }
+      };
+
+      request(options, (err, response, body) => (
+        (err || response.statusCode >= 400) ? reject(err || body) : resolve(body)
+      ));
+    });
+  },
+
+  unsubscribe(subscriptionId, accessToken) {
+    return new Promise((resolve, reject) => {
+      const options = {
+        method: 'DELETE',
+        baseUrl: credentials.restApi,
+        uri: `/subscriptions/${subscriptionId}?api-version=2016-10-10`,
+        headers: {
+          Authorization: `SharedAccessSignature ${accessToken}`,
+          'If-Match': '*'
+        }
+      };
+
+      request(options, (err, response, body) => (
+        (err || response.statusCode >= 400) ? reject(err || body) : resolve(body)
+      ));
+    });
+  },
+
   generateAccessToken() {
     const hmac = crypto.createHmac('sha512', new Buffer(credentials.key, 'utf8'));
 

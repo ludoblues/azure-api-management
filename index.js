@@ -164,6 +164,15 @@ module.exports = (credentials) => ({
     return signature === sig;
   },
 
+  verifyUnsubscribeSignature(salt, subscriptionId, sig) {
+    const hmac = crypto.createHmac('sha512', new Buffer(credentials.delegationKey, 'base64'));
+    const digest = hmac.update(`${salt}\n${subscriptionId}`).digest();
+
+    const signature = digest.toString('base64');
+
+    return signature === sig;
+  },
+
   verifySignature(query) {
     if (query.operation === 'SignIn') {
       return this.verifySignInSignature(query.salt, query.returnUrl, query.sig);
@@ -171,6 +180,10 @@ module.exports = (credentials) => ({
       return this.verifySignOutSignature(query.salt, query.userId, query.sig);
     } else if (query.operation === 'Subscribe') {
       return this.verifySubscriptionSignature(query.salt, query.productId, query.userId, query.sig);
+    } else if (query.operation === 'Unsubscribe') {
+      return this.verifyUnsubscribeSignature(query.salt, query.subscriptionId, query.sig);
+    } else {
+      return false;
     }
   }
 });

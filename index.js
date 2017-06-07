@@ -4,6 +4,28 @@ const moment = require('moment');
 const request = require('request');
 
 module.exports = (credentials) => ({
+  getSubscriptions(filter, accessToken) {
+    return new Promise( (resolve, reject) => {
+      const options = {
+        method: 'GET',
+        baseUrl: credentials.restApi,
+        uri: `/subscriptions`,
+        headers: {
+          Authorization: `SharedAccessSignature ${accessToken}`
+        }
+      };
+
+      request(options, (err, response, body) => {
+        if (err || response.statusCode >= 400) {
+          return reject(err || body);
+        }
+
+        body = JSON.parse(body);
+        resolve(body.value);
+      });
+    });
+  },
+  
   connectUser(userId, accessToken) {
     return new Promise( (resolve, reject) => {
       const options = {

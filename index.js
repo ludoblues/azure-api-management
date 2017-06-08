@@ -9,7 +9,7 @@ module.exports = (credentials) => ({
       const options = {
         method: 'GET',
         baseUrl: credentials.restApi,
-        uri: `/subscriptions`,
+        uri: `/subscriptions?api-version=2016-10-10`,
         headers: {
           Authorization: `SharedAccessSignature ${accessToken}`
         }
